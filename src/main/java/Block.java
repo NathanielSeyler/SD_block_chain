@@ -3,6 +3,7 @@ public class Block {
 	private static int profondeur = -1;
 	private Node createur;
 	private String ash;
+	private Block next;
 	
 	//TODO implements here 
 	//private ??? operations;
@@ -11,5 +12,11 @@ public class Block {
 		profondeur++;
 		createur = n;
 		ash = s;
+		next = null;
+	}
+	
+	public void setNext(Block b)
+	{
+		next = b;
 	}
 }
