@@ -27,9 +27,30 @@ public class Node {
 	{
 		participants.add(p);
 		fileOperations.add("IB : " + p + " à " + this);
-		//TODO implements here
-		//transmission aux voisins
 	}
 	
-	//TODO implements here
+	public void creationBlock()
+	{
+		float v = 1 / participants.size();
+		for ( Participant p : participants)
+		{
+			p.debit(v);
+			fileOperations.add("CB : " + v + " à " + p);
+		}
+		//TODO implements here
+		//calcul du hash + new block + ajout operations dans le block + transmition du block
+	}
+	
+	public void echangerBlock(Participant p1,Participant p2,float v)
+	{
+		p1.credit(v);
+		p2.debit(v);
+		fileOperations.add("EB : " + v + " : " + p1 + " à " + p2);
+	}
+	
+	public float possede(Participant p)
+	{
+		fileOperations.add("PB : " + p + " à " + this);
+		return p.getValeur();
+	}
 }

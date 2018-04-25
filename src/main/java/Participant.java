@@ -1,22 +1,23 @@
 public class Participant {
 	//on peut peut etre ajouter un identifiant a voir si c'est utile
-	private int valeur ;
+	private float valeur ;
 	
 	public Participant(){
 		valeur = 0;
 	}
 	
-	public int getValeur()
+	public float getValeur()
 	{
+		//TODO implements here
 		return valeur;
 	}
 	
-	public void debit(int v)
+	public void debit(float v)
 	{
 		valeur += v;
 	}
 	
-	public void credit(int v)
+	public void credit(float v)
 	{
 		valeur -= v;
 	}
