@@ -6,7 +6,7 @@ public class Block {
 	private Block next;
 	
 	//TODO implements here 
-	//private ??? operations;
+	private String operations;
 	
 	public Block(Node n , String s){
 		profondeur++;
