@@ -1,6 +1,13 @@
 import java.util.LinkedList;
+import java.rmi.server.UnicastRemoteObject ;
+import java.rmi.RemoteException ;
+import java.net.InetAddress.* ;
+import java.net.* ;
 
-public class NodeImpl implements Node{
+public class NodeImpl 
+	extends UnicastRemoteObject 
+	implements Node
+{
 	
 	private NodeImpl[] voisins;
 	private LinkedList<String> fileOperations;
@@ -9,7 +16,10 @@ public class NodeImpl implements Node{
 	private Block racine;
 	private Block cur;
 	
-	public NodeImpl(){
+	public NodeImpl()
+		throws RemoteException
+	{
+		super();
 		voisins = null;
 		fileOperations = new LinkedList<String>();
 		participants = new LinkedList<Participant>();
@@ -18,18 +28,21 @@ public class NodeImpl implements Node{
 	}
 	
 	public void setVoisins(NodeImpl[] tab)
+		throws RemoteException
 	{
 		voisins = tab;
 	}
 	
 	
 	public void inscriptionParticipant(Participant p)
+		throws RemoteException
 	{
 		participants.add(p);
 		fileOperations.add("IB : " + p + " à " + this);
 	}
 	
 	public void creationBlock()
+		throws RemoteException
 	{
 		float v = 1 / participants.size();
 		for ( Participant p : participants)
@@ -42,6 +55,7 @@ public class NodeImpl implements Node{
 	}
 	
 	public void echangerBlock(Participant p1,Participant p2,float v)
+		throws RemoteException
 	{
 		p1.credit(v);
 		p2.debit(v);
@@ -49,6 +63,7 @@ public class NodeImpl implements Node{
 	}
 	
 	public float possede(Participant p)
+		throws RemoteException
 	{
 		fileOperations.add("PB : " + p + " à " + this);
 		return p.getValeur();
