@@ -1,6 +1,6 @@
 import java.util.LinkedList;
 
-public class NodeImpl {
+public class NodeImpl implements Node{
 	
 	private NodeImpl[] voisins;
 	private LinkedList<String> fileOperations;
