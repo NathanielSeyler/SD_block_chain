@@ -58,6 +58,7 @@ public class NodeImpl
 		throws RemoteException
 	{
 		p1.credit(v);
+		//TODO implements here
 		p2.debit(v);
 		fileOperations.add("EB : " + v + " : " + p1 + " à " + p2);
 	}
