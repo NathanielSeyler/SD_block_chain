@@ -14,4 +14,10 @@ public interface Node extends Remote {
 		throws RemoteException;
 	public boolean inscrit(Participant p)
 		throws RemoteException;
+	/*public void envoieBlock(NodeImpl src,Block b)
+		throws RemoteException;
+	public void receptionBlock(NodeImpl src,Block b);
+		throws RemoteException;
+	public void receptionOperation(String op)
+		throws RemoteException;*/
 }
