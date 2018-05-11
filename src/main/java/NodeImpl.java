@@ -47,7 +47,7 @@ public class NodeImpl
 		float v = 1 / participants.size();
 		for ( Participant p : participants)
 		{
-			p.debit(v);
+			//p.debit(v);
 			fileOperations.add("CB : " + v + " à " + p);
 		}
 		//TODO implements here
@@ -57,9 +57,9 @@ public class NodeImpl
 	public void echangerBlock(Participant p1,Participant p2,float v)
 		throws RemoteException
 	{
-		p1.credit(v);
+		//p1.credit(v);
 		//TODO implements here
-		p2.debit(v);
+		//p2.debit(v);
 		fileOperations.add("EB : " + v + " : " + p1 + " à " + p2);
 	}
 	
@@ -67,6 +67,7 @@ public class NodeImpl
 		throws RemoteException
 	{
 		fileOperations.add("PB : " + p + " à " + this);
-		return p.getValeur();
+		//TODO implements here
+		return 0;
 	}
 }
