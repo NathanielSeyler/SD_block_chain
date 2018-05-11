@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 public class Block {
 	
 	private static int profondeur = -1;
@@ -6,13 +8,14 @@ public class Block {
 	private Block next;
 	
 	//TODO implements here 
-	private String operations;
+	private LinkedList<String> operations;
 	
-	public Block(Node n , String s){
+	public Block(Node n , String hash , LinkedList<String> op){
 		profondeur++;
 		createur = n;
-		ash = s;
+		ash = hash;
 		next = null;
+		operations = op;
 	}
 	
 	public void setNext(Block b)
