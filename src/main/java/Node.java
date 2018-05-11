@@ -12,4 +12,6 @@ public interface Node extends Remote {
 		throws RemoteException;
 	public float possede(Participant p)
 		throws RemoteException;
+	public boolean inscrit(Participant p)
+		throws RemoteException;
 }

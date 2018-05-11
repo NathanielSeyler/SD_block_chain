@@ -26,6 +26,42 @@ public class Participant {
 		valeur -= v;
 	}*/
 	
+	public void inscriptionNode(Node n)
+	{
+		try
+		{
+			n.inscriptionParticipant(this);
+		}
+	    catch (RemoteException re) { System.out.println(re) ; }
+		
+	}
+	
+	public void echangerBlock(Node n , Participant p ,float v)
+	{
+		try 
+		{
+			if(n.inscrit(this) && n.inscrit(p))
+			{
+				n.echangerBlock(this,p,v);
+			}
+			else
+				System.out.println(p + " n'existe pas");
+		}
+		catch (RemoteException re) { System.out.println(re) ; }
+	}
+	
+	public float possede(Node n)
+	{
+		float v = 0;
+		try
+		{
+			v = n.possede(this);
+		}
+		catch (RemoteException re) { System.out.println(re) ; }
+		
+		return v;
+	}
+	
 	 public static void main(String [] args)
 	{
 		if (args.length != 1) 

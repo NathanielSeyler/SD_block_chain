@@ -33,12 +33,18 @@ public class NodeImpl
 		voisins = tab;
 	}
 	
+	public boolean inscrit(Participant p)
+		throws RemoteException
+	{
+		return false;
+	}
 	
 	public void inscriptionParticipant(Participant p)
 		throws RemoteException
 	{
 		participants.add(p);
 		fileOperations.add("IB : " + p + " à " + this);
+		//transmition file
 	}
 	
 	public void creationBlock()
@@ -61,12 +67,14 @@ public class NodeImpl
 		//TODO implements here
 		//p2.debit(v);
 		fileOperations.add("EB : " + v + " : " + p1 + " à " + p2);
+		//transmition file 
 	}
 	
 	public float possede(Participant p)
 		throws RemoteException
 	{
 		fileOperations.add("PB : " + p + " à " + this);
+		//transmition file
 		//TODO implements here
 		return 0;
 	}
