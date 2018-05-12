@@ -11,10 +11,9 @@ public class Block {
 	//TODO implements here 
 	private LinkedList<String> operations;
 	
-	public Block(Node n , String hash , LinkedList<String> op){
+	public Block(Node n , LinkedList<String> op){
 		profondeur++;
 		createur = n;
-		ash = hash;
 		next = null;
 		operations = op;
 	}
@@ -27,5 +26,10 @@ public class Block {
 	public int getProfondeur()
 	{
 		return profondeur;
+	}
+	
+	public void setHash(String hash)
+	{
+		ash = hash;
 	}
 }

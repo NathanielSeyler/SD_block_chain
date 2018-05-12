@@ -61,14 +61,18 @@ public class NodeImpl
 		//calcul du hash + new block + ajout operations dans le block + transmition du block
 		String ash = "";
 		LinkedList<String> op = new LinkedList<String>();
-		Block b = new Block(this,ash,op);
+		Block b = new Block(this,op);
 		if(b.getProfondeur() == 0)
 		{
+			//ash = hachage(b);
+			b.setHash(ash);
 			racine = b;
 			cur = racine;
 		}
 		else
 		{
+			//ash = hachage(cur);
+			b.setHash(ash);
 			cur.setNext(b);
 			cur = b ;
 		}
