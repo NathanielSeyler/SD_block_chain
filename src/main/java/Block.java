@@ -6,6 +6,7 @@ public class Block {
 	private Node createur;
 	private String ash;
 	private Block next;
+	private int capacity;
 	
 	//TODO implements here 
 	private LinkedList<String> operations;
@@ -21,5 +22,10 @@ public class Block {
 	public void setNext(Block b)
 	{
 		next = b;
+	}
+	
+	public int getProfondeur()
+	{
+		return profondeur;
 	}
 }
