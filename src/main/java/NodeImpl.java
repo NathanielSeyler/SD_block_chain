@@ -15,6 +15,7 @@ public class NodeImpl
 	
 	private Block racine;
 	private Block cur;
+	private int profAttendue;
 	
 	public NodeImpl()
 		throws RemoteException
@@ -25,6 +26,7 @@ public class NodeImpl
 		participants = new LinkedList<Participant>();
 		racine = null;
 		cur = racine ;
+		profAttendue = 0;
 	}
 	
 	public void setVoisins(NodeImpl[] tab)
@@ -101,6 +103,7 @@ public class NodeImpl
 			v.receptionOperation(op);
 			
 		//TODO implements here
+		//calculer ce que possede le Participant
 		return 0;
 	}
 	
@@ -113,6 +116,29 @@ public class NodeImpl
 	public void receptionBlock(NodeImpl src , Block b)
 		throws RemoteException
 	{
-		
+		int profBlock = b.getProfondeur();
+		if( profBlock == profAttendue)
+		{
+			if(profBlock == 0)
+			{
+				racine = b;
+				cur = racine;
+				profAttendue++;
+				//TODO implements here
+				//enlever les operations de la file
+			}
+			else
+			{
+				cur.setNext(b);
+				cur = b;
+				profAttendue++;
+				//TODO implements here
+				//enlever les operations de la file
+			}
+		}
+		else if(profBlock > profAttendue)
+		{
+			//TODO implements here
+		}
 	}
 }
