@@ -58,7 +58,6 @@ public class Participant {
 			v = n.possede(this);
 		}
 		catch (RemoteException re) { System.out.println(re) ; }
-		
 		return v;
 	}
 	

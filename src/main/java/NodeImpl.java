@@ -36,6 +36,7 @@ public class NodeImpl
 	public boolean inscrit(Participant p)
 		throws RemoteException
 	{
+		//TODO implements here
 		return false;
 	}
 	
@@ -58,6 +59,16 @@ public class NodeImpl
 		}
 		//TODO implements here
 		//calcul du hash + new block + ajout operations dans le block + transmition du block
+		String ash = "";
+		LinkedList<String> op = new LinkedList<String>();
+		Block b = new Block(this,ash,op);
+		if(b.getProfondeur() == 0)
+		{
+			racine = b;
+			cur = racine;
+		}
+		else
+			cur.setNext(b);
 	}
 	
 	public void echangerBlock(Participant p1,Participant p2,float v)
