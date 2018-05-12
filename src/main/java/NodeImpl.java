@@ -51,17 +51,20 @@ public class NodeImpl
 	public void creationBlock()
 		throws RemoteException
 	{
-		float v = 1 / participants.size();
+		float val = 1 / participants.size();
+		String op;
 		for ( Participant p : participants)
 		{
-			//p.debit(v);
-			fileOperations.add("CB : " + v + " à " + p);
+			op = "CB : " + val + " à " + p;
+			fileOperations.add(op);
+			for(NodeImpl v : voisins)
+				v.receptionOperation(op);
 		}
 		//TODO implements here
 		//calcul du hash + new block + ajout operations dans le block + transmition du block
 		String ash = "";
-		LinkedList<String> op = new LinkedList<String>();
-		Block b = new Block(this,op);
+		LinkedList<String> ops = new LinkedList<String>();
+		Block b = new Block(this,ops);
 		if(b.getProfondeur() == 0)
 		{
 			//ash = hachage(b);
@@ -78,22 +81,36 @@ public class NodeImpl
 		}
 	}
 	
-	public void echangerBlock(Participant p1,Participant p2,float v)
+	public void echangerBlock(Participant p1,Participant p2,float val)
 		throws RemoteException
 	{
-		//p1.credit(v);
-		//TODO implements here
-		//p2.debit(v);
-		fileOperations.add("EB : " + v + " : " + p1 + " à " + p2);
-		//transmition file 
+		String op = "EB : " + val + " : " + p1 + " à " + p2;
+		fileOperations.add(op);
+		for(NodeImpl v : voisins)
+			v.receptionOperation(op); 
 	}
 	
 	public float possede(Participant p)
 		throws RemoteException
 	{
-		fileOperations.add("PB : " + p + " à " + this);
-		//transmition file
+		String op = "PB : " + p + " à " + this;
+		fileOperations.add(op);
+		for(NodeImpl v : voisins)
+			v.receptionOperation(op);
+			
 		//TODO implements here
 		return 0;
+	}
+	
+	public void receptionOperation(String op)
+		throws RemoteException
+	{
+		fileOperations.add(op);
+	}
+	
+	public void receptionBlock(NodeImpl src , Block b)
+		throws RemoteException
+	{
+		
 	}
 }
