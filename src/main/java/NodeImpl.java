@@ -68,7 +68,10 @@ public class NodeImpl
 			cur = racine;
 		}
 		else
+		{
 			cur.setNext(b);
+			cur = b ;
+		}
 	}
 	
 	public void echangerBlock(Participant p1,Participant p2,float v)
