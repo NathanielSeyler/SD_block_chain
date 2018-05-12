@@ -139,6 +139,9 @@ public class NodeImpl
 		else if(profBlock > profAttendue)
 		{
 			//TODO implements here
+			//envoyer ce qui manque
 		}
+		//else if( profBlock < profAttendue && profBlock + longueurChaine > profAttendue)
+		//prends la chaine de plus grande longueur
 	}
 }
