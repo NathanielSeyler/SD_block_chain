@@ -44,8 +44,10 @@ public class NodeImpl
 		throws RemoteException
 	{
 		participants.add(p);
-		fileOperations.add("IB : " + p + " à " + this);
-		//transmition file
+		String op = "IB : " + p + " à " + this;
+		fileOperations.add(op);
+		for(NodeImpl v : voisins)
+			v.receptionOperation(op);
 	}
 	
 	public void creationBlock()
