@@ -14,6 +14,7 @@ public class Block {
 	public Block(Node n , LinkedList<String> op){
 		profondeur++;
 		createur = n;
+		ash = "Ash is OP";
 		next = null;
 		operations = op;
 	}
