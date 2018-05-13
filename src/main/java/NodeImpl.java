@@ -140,8 +140,39 @@ public class NodeImpl
 		{
 			//TODO implements here
 			//envoyer ce qui manque
+			src.envoieBlock(this,profAttendue);
 		}
-		//else if( profBlock < profAttendue && profBlock + longueurChaine > profAttendue)
+		else if( profBlock < profAttendue)
+		{
+			int longueurChaine = 1;
+			Block tmp = b;
+			while(tmp.next != null)
+			{
+				tmp = tmp.next;
+				longueurChaine++;
+			}
+			longueurChaine++;
+			
+			if(profBlock + longueurChaine > profAttendue)
+			{
+				cur.next = b;
+				//TODO implements here
+				//enlever les operations de la file
+				cur = tmp;
+				profAttendue = profBlock + longueurChaine;
+			}	
+		}
 		//prends la chaine de plus grande longueur
+	}
+	
+	public void envoieBlock(NodeImpl src , int prof)
+		throws RemoteException
+	{
+		Block tmp = racine;
+		while (tmp.getProfondeur() != prof)
+		{
+			tmp = tmp.next;
+		}
+		src.receptionBlock(this,tmp);
 	}
 }
