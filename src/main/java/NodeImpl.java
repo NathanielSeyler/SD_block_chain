@@ -146,16 +146,16 @@ public class NodeImpl
 		{
 			int longueurChaine = 1;
 			Block tmp = b;
-			while(tmp.next != null)
+			while(tmp.getNext() != null)
 			{
-				tmp = tmp.next;
+				tmp = tmp.getNext();
 				longueurChaine++;
 			}
 			longueurChaine++;
 			
 			if(profBlock + longueurChaine > profAttendue)
 			{
-				cur.next = b;
+				cur.setNext(b);
 				//TODO implements here
 				//enlever les operations de la file
 				cur = tmp;
@@ -171,7 +171,7 @@ public class NodeImpl
 		Block tmp = racine;
 		while (tmp.getProfondeur() != prof)
 		{
-			tmp = tmp.next;
+			tmp = tmp.getNext();
 		}
 		src.receptionBlock(this,tmp);
 	}
