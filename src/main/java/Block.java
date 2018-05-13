@@ -33,4 +33,9 @@ public class Block {
 	{
 		ash = hash;
 	}
+	
+	public Block getNext()
+	{
+		return next;
+	}
 }
