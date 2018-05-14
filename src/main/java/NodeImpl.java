@@ -14,7 +14,7 @@ public class NodeImpl
 	
 	private NodeImpl[] voisins;
 	private LinkedList<String> fileOperations;
-	private LinkedList<Participant> participants;
+	private LinkedList<Integer> participants;
 	
 	private Block racine;
 	private Block cur;
@@ -26,7 +26,7 @@ public class NodeImpl
 		super();
 		voisins = null;
 		fileOperations = new LinkedList<String>();
-		participants = new LinkedList<Participant>();
+		participants = new LinkedList<Integer>();
 		racine = null;
 		cur = racine ;
 		profAttendue = 0;
@@ -38,7 +38,7 @@ public class NodeImpl
 		voisins = tab;
 	}
 	
-	public boolean inscrit(Participant p)
+	public boolean inscrit(int p)
 		throws RemoteException
 	{
 		Block tmp = racine;
@@ -57,10 +57,10 @@ public class NodeImpl
 		return false;
 	}
 	
-	public void inscriptionParticipant(Participant p)
+	public void inscriptionParticipant(int p)
 		throws RemoteException
 	{
-		participants.add(p);
+		participants.add(new Integer(p));
 		String op = "IB:" + p + ":" + this;
 		fileOperations.add(op);
 		System.out.println(op);
@@ -96,9 +96,9 @@ public class NodeImpl
 		
 		float val = 1 / participants.size();
 		String op;
-		for ( Participant p : participants)
+		for ( Integer p : participants)
 		{
-			op = "CB:" + val + ":" + p;
+			op = "CB:" + val + ":" + p.toString();
 			fileOperations.add(op);
 			System.out.println(op);
 			for(NodeImpl v : voisins)
@@ -109,7 +109,7 @@ public class NodeImpl
 		}
 	}
 	
-	public void echangerBlock(Participant p1,Participant p2,float val)
+	public void echangerBlock(int p1,int p2,float val)
 		throws RemoteException
 	{
 		String op = "EB:" + val + ":" + p1 + ":" + p2;
@@ -119,7 +119,7 @@ public class NodeImpl
 			v.receptionOperation(op); 
 	}
 	
-	public float possede(Participant p)
+	public float possede(int p)
 		throws RemoteException
 	{
 		String op = "PB:" + p + ":" + this;
@@ -127,7 +127,8 @@ public class NodeImpl
 		System.out.println(op);
 		for(NodeImpl v : voisins)
 			v.receptionOperation(op);
-			
+		
+		Integer ip = new Integer(p);	
 		Block tmp = racine;
 		LinkedList<String> ops;
 		String[] tab;
@@ -138,11 +139,11 @@ public class NodeImpl
 			for(String op1 : ops)
 			{
 				tab = op1.split(":");
-				if(tab[0].compareTo("CB") == 0 && tab[2].compareTo(p.toString()) == 0 )
+				if(tab[0].compareTo("CB") == 0 && tab[2].compareTo(ip.toString()) == 0 )
 					val += Float.valueOf(tab[1]);
-				if(tab[0].compareTo("EB") == 0 && tab[2].compareTo(p.toString()) == 0 )
+				if(tab[0].compareTo("EB") == 0 && tab[2].compareTo(ip.toString()) == 0 )
 					val -= Float.valueOf(tab[1]);
-				if(tab[0].compareTo("EB") == 0 && tab[3].compareTo(p.toString()) == 0 )
+				if(tab[0].compareTo("EB") == 0 && tab[3].compareTo(ip.toString()) == 0 )
 					val += Float.valueOf(tab[1]);
 			}
 		}

@@ -4,46 +4,26 @@ import java.util.*;
 
 public class Participant {
 	//on peut peut etre ajouter un identifiant a voir si c'est utile
-	/*private float valeur ;
-	
-	public Participant(){
-		valeur = 0;
-	}
-	
-	public float getValeur()
-	{
-		//TODO implements here
-		return valeur;
-	}
-	
-	public void debit(float v)
-	{
-		valeur += v;
-	}
-	
-	public void credit(float v)
-	{
-		valeur -= v;
-	}*/
+	private int id;
 	
 	public void inscriptionNode(Node n)
 	{
 		try
 		{
-			n.inscriptionParticipant(this);
+			n.inscriptionParticipant(id);
 			System.out.println("je me suis inscrit a un noeud");
 		}
 	    catch (RemoteException re) { System.out.println(re) ; }
 		
 	}
 	
-	public void echangerBlock(Node n , Participant p ,float v)
+	public void echangerBlock(Node n , int p ,float v)
 	{
 		try 
 		{
-			if(n.inscrit(this) && n.inscrit(p))
+			if(n.inscrit(id) && n.inscrit(p))
 			{
-				n.echangerBlock(this,p,v);
+				n.echangerBlock(id,p,v);
 			}
 			else
 				System.out.println(p + " n'existe pas");
@@ -56,7 +36,7 @@ public class Participant {
 		float v = 0;
 		try
 		{
-			v = n.possede(this);
+			v = n.possede(id);
 		}
 		catch (RemoteException re) { System.out.println(re) ; }
 		return v;
