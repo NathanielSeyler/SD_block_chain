@@ -1,3 +1,7 @@
+import java.rmi.* ; 
+import java.net.MalformedURLException ; 
+import java.util.*;
+
 public class Simulation {
 	public static void main(String[] args){
 		//TODO implements here
@@ -11,7 +15,10 @@ public class Simulation {
 		NodeImpl ni = bn.bind(args[1]);
 		Node n = p.connect(args);
 		p.inscriptionNode(n);
-		n.creationBlock();
+		try{
+			n.creationBlock();
+		}
+		catch (RemoteException re) { System.out.println(re) ; }
 		System.out.println(p.possede(n));
 		//test
 	} 
