@@ -64,8 +64,9 @@ public class NodeImpl
 		String op = "IB:" + p + ":" + this;
 		fileOperations.add(op);
 		System.out.println(op);
-		for(NodeImpl v : voisins)
-			v.receptionOperation(op);
+		if(voisins != null)
+			for(NodeImpl v : voisins)
+				v.receptionOperation(op);
 	}
 	
 	public void creationBlock()
@@ -101,11 +102,12 @@ public class NodeImpl
 			op = "CB:" + val + ":" + p.toString();
 			fileOperations.add(op);
 			System.out.println(op);
-			for(NodeImpl v : voisins)
-			{
-				v.receptionOperation(op);
-				v.receptionBlock(this,b);
-			}
+			if(voisins != null)
+				for(NodeImpl v : voisins)
+				{
+					v.receptionOperation(op);
+					v.receptionBlock(this,b);
+				}
 		}
 	}
 	
@@ -115,8 +117,9 @@ public class NodeImpl
 		String op = "EB:" + val + ":" + p1 + ":" + p2;
 		fileOperations.add(op);
 		System.out.println(op);
-		for(NodeImpl v : voisins)
-			v.receptionOperation(op); 
+		if(voisins != null)
+			for(NodeImpl v : voisins)
+				v.receptionOperation(op); 
 	}
 	
 	public float possede(int p)
@@ -125,8 +128,9 @@ public class NodeImpl
 		String op = "PB:" + p + ":" + this;
 		fileOperations.add(op);
 		System.out.println(op);
-		for(NodeImpl v : voisins)
-			v.receptionOperation(op);
+		if(voisins != null)
+			for(NodeImpl v : voisins)
+				v.receptionOperation(op);
 		
 		Integer ip = new Integer(p);	
 		Block tmp = racine;
@@ -186,7 +190,7 @@ public class NodeImpl
 		}
 		else if( profBlock < profAttendue)
 		{
-			int longueurChaine = 1;
+			int longueurChaine = 0;
 			Block tmp = b;
 			while(tmp.getNext() != null)
 			{

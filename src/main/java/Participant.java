@@ -4,7 +4,12 @@ import java.util.*;
 
 public class Participant {
 	//on peut peut etre ajouter un identifiant a voir si c'est utile
-	private int id;
+	private static int id =-1 ;
+	
+	public Participant()
+	{
+		id++;
+	}
 	
 	public void inscriptionNode(Node n)
 	{

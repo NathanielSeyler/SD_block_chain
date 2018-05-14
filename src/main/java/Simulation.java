@@ -3,7 +3,7 @@ public class Simulation {
 		//TODO implements here
 		if (args.length != 2)
 		{ 
-			System.out.println("Usage : java Participant <machine du Serveur> <port du rmiregistry>") ;
+			System.out.println("Usage : java Simulation <machine du Serveur> <port du rmiregistry>") ;
 			System.exit(1);
 		}
 		Participant p = new Participant();
