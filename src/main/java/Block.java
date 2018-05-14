@@ -11,12 +11,11 @@ public class Block {
 	//TODO implements here 
 	private LinkedList<String> operations;
 	
-	public Block(Node n , LinkedList<String> op){
+	public Block(Node n){
 		profondeur++;
 		createur = n;
 		ash = "Ash is OP";
 		next = null;
-		operations = op;
 	}
 	
 	public void setNext(Block b)
@@ -34,13 +33,28 @@ public class Block {
 		ash = hash;
 	}
 	
+	public void setOperations(LinkedList<String> op)
+	{
+		operations = op;
+	}
+	
 	public Block getNext()
 	{
 		return next;
 	}
 	
+	public int getCapacity()
+	{
+		return capacity;
+	}
+	
 	public String toString()
 	{
 		return Integer.toString(profondeur) + createur.toString() + ash + Integer.toString(capacity);
+	}
+	
+	public LinkedList<String> getOperations()
+	{
+		return operations;
 	}
 }

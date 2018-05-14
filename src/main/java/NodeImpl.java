@@ -41,7 +41,19 @@ public class NodeImpl
 	public boolean inscrit(Participant p)
 		throws RemoteException
 	{
-		//TODO implements here
+		Block tmp = racine;
+		LinkedList<String> ops;
+		String test = "IB:" + p + ":" + this;
+		
+		while (tmp != null)
+		{
+			ops = tmp.getOperations();
+			for(String op : ops)
+			{
+				if(op.compareTo(test) == 0)
+					return true;
+			}
+		}
 		return false;
 	}
 	
@@ -49,7 +61,7 @@ public class NodeImpl
 		throws RemoteException
 	{
 		participants.add(p);
-		String op = "IB : " + p + " à " + this;
+		String op = "IB:" + p + ":" + this;
 		fileOperations.add(op);
 		System.out.println(op);
 		for(NodeImpl v : voisins)
@@ -59,21 +71,14 @@ public class NodeImpl
 	public void creationBlock()
 		throws RemoteException
 	{
-		float val = 1 / participants.size();
-		String op;
-		for ( Participant p : participants)
-		{
-			op = "CB : " + val + " à " + p;
-			fileOperations.add(op);
-			System.out.println(op);
-			for(NodeImpl v : voisins)
-				v.receptionOperation(op);
-		}
-		//TODO implements here
-		//calcul du hash + new block + ajout operations dans le block + transmition du block
 		String ash = "";
 		LinkedList<String> ops = new LinkedList<String>();
-		Block b = new Block(this,ops);
+		int i;
+		Block b = new Block(this);
+		for(i = 0; i < b.getCapacity();i++)
+			ops.add(fileOperations.poll());
+			
+		b.setOperations(ops);
 		if(b.getProfondeur() == 0)
 		{
 			ash = hachage(b);
@@ -88,12 +93,26 @@ public class NodeImpl
 			cur.setNext(b);
 			cur = b ;
 		}
+		
+		float val = 1 / participants.size();
+		String op;
+		for ( Participant p : participants)
+		{
+			op = "CB:" + val + ":" + p;
+			fileOperations.add(op);
+			System.out.println(op);
+			for(NodeImpl v : voisins)
+			{
+				v.receptionOperation(op);
+				v.receptionBlock(this,b);
+			}
+		}
 	}
 	
 	public void echangerBlock(Participant p1,Participant p2,float val)
 		throws RemoteException
 	{
-		String op = "EB : " + val + " : " + p1 + " à " + p2;
+		String op = "EB:" + val + ":" + p1 + ":" + p2;
 		fileOperations.add(op);
 		System.out.println(op);
 		for(NodeImpl v : voisins)
@@ -103,15 +122,32 @@ public class NodeImpl
 	public float possede(Participant p)
 		throws RemoteException
 	{
-		String op = "PB : " + p + " à " + this;
+		String op = "PB:" + p + ":" + this;
 		fileOperations.add(op);
 		System.out.println(op);
 		for(NodeImpl v : voisins)
 			v.receptionOperation(op);
 			
-		//TODO implements here
-		//calculer ce que possede le Participant
-		return 0;
+		Block tmp = racine;
+		LinkedList<String> ops;
+		String[] tab;
+		float val = 0;
+		while (tmp != null)
+		{
+			ops = tmp.getOperations();
+			for(String op1 : ops)
+			{
+				tab = op1.split(":");
+				if(tab[0].compareTo("CB") == 0 && tab[2].compareTo(p.toString()) == 0 )
+					val += Float.valueOf(tab[1]);
+				if(tab[0].compareTo("EB") == 0 && tab[2].compareTo(p.toString()) == 0 )
+					val -= Float.valueOf(tab[1]);
+				if(tab[0].compareTo("EB") == 0 && tab[3].compareTo(p.toString()) == 0 )
+					val += Float.valueOf(tab[1]);
+			}
+		}
+		
+		return val;
 	}
 	
 	public void receptionOperation(String op)
@@ -132,21 +168,18 @@ public class NodeImpl
 				racine = b;
 				cur = racine;
 				profAttendue++;
-				//TODO implements here
-				//enlever les operations de la file
+				libereOperations(b);
 			}
 			else
 			{
 				cur.setNext(b);
 				cur = b;
 				profAttendue++;
-				//TODO implements here
-				//enlever les operations de la file
+				libereOperations(b);
 			}
 		}
 		else if(profBlock > profAttendue)
 		{
-			//TODO implements here
 			//envoyer ce qui manque
 			src.envoieBlock(this,profAttendue);
 		}
@@ -163,14 +196,13 @@ public class NodeImpl
 			
 			if(profBlock + longueurChaine > profAttendue)
 			{
+				//prends la chaine de plus grande longueur
 				cur.setNext(b);
-				//TODO implements here
-				//enlever les operations de la file
 				cur = tmp;
 				profAttendue = profBlock + longueurChaine;
+				libereOperations(b);
 			}	
 		}
-		//prends la chaine de plus grande longueur
 	}
 	
 	public void envoieBlock(NodeImpl src , int prof)
@@ -205,5 +237,15 @@ public class NodeImpl
 			e.printStackTrace();
 		}
 		return hash;
+	}
+	
+	private void libereOperations(Block b)
+	{
+		Block tmp = b;
+		while(tmp != null)
+			for(String op : tmp.getOperations() )
+				for(String fop : fileOperations )
+					if(fop.compareTo(op) == 0)
+						fileOperations.remove(fop);
 	}
 }
