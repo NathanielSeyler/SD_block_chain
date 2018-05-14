@@ -76,14 +76,14 @@ public class NodeImpl
 		Block b = new Block(this,ops);
 		if(b.getProfondeur() == 0)
 		{
-			//ash = hachage(b);
+			ash = hachage(b);
 			b.setHash(ash);
 			racine = b;
 			cur = racine;
 		}
 		else
 		{
-			//ash = hachage(cur);
+			ash = hachage(cur);
 			b.setHash(ash);
 			cur.setNext(b);
 			cur = b ;
