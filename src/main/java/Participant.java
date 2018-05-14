@@ -63,13 +63,14 @@ public class Participant {
 	
 	 public static void main(String [] args)
 	{
-		if (args.length != 1) 
+		if (args.length != 2) 
 			System.out.println("Usage : java Participant <machine du Serveur> <port du rmiregistry>") ;
 		else
 		{
 	    try
 			{
 				Node bn = (Node) Naming.lookup("rmi://" + args[0] + ":" + args[1] + "/Node") ;
+				bn.inscriptionParticipant(this);
 	
 	    }
 	    catch (NotBoundException re) { System.out.println(re) ; }

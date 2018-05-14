@@ -48,6 +48,7 @@ public class NodeImpl
 		participants.add(p);
 		String op = "IB : " + p + " à " + this;
 		fileOperations.add(op);
+		System.out.println(op);
 		for(NodeImpl v : voisins)
 			v.receptionOperation(op);
 	}
@@ -61,6 +62,7 @@ public class NodeImpl
 		{
 			op = "CB : " + val + " à " + p;
 			fileOperations.add(op);
+			System.out.println(op);
 			for(NodeImpl v : voisins)
 				v.receptionOperation(op);
 		}
@@ -90,6 +92,7 @@ public class NodeImpl
 	{
 		String op = "EB : " + val + " : " + p1 + " à " + p2;
 		fileOperations.add(op);
+		System.out.println(op);
 		for(NodeImpl v : voisins)
 			v.receptionOperation(op); 
 	}
@@ -99,6 +102,7 @@ public class NodeImpl
 	{
 		String op = "PB : " + p + " à " + this;
 		fileOperations.add(op);
+		System.out.println(op);
 		for(NodeImpl v : voisins)
 			v.receptionOperation(op);
 			
@@ -111,6 +115,7 @@ public class NodeImpl
 		throws RemoteException
 	{
 		fileOperations.add(op);
+		System.out.println(op);
 	}
 	
 	public void receptionBlock(NodeImpl src , Block b)
