@@ -10,17 +10,18 @@ public class Simulation {
 			System.out.println("Usage : java Simulation <machine du Serveur> <port du rmiregistry>") ;
 			System.exit(1);
 		}
-		Participant p = new Participant();
-		BlockNode bn = new BlockNode();
-		NodeImpl ni = bn.bind(args[1]);
-		Node n = p.connect(args);
-		p.inscriptionNode(n);
-		try{
+		try {
+			
+			Participant p = new Participant();
+			BlockNode bn = new BlockNode();
+			NodeImpl ni = bn.bind(args[1]);
+			Node n = p.connect(args);
+			p.inscriptionNode(n);
 			n.creationBlock();
+			p.possede(n);
+		
+			System.exit(0);
 		}
 		catch (RemoteException re) { System.out.println(re) ; }
-		p.possede(n);
-		//test
-		System.exit(0);
 	} 
 }
