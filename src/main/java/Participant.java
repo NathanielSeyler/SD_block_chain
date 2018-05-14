@@ -61,21 +61,25 @@ public class Participant {
 		return v;
 	}
 	
-	 public static void main(String [] args)
+	 public Node connect(String [] args)
 	{
-		if (args.length != 2) 
+		if (args.length != 2)
+		{ 
 			System.out.println("Usage : java Participant <machine du Serveur> <port du rmiregistry>") ;
+			return null;
+		}
 		else
 		{
-	    try
-			{
-				Node bn = (Node) Naming.lookup("rmi://" + args[0] + ":" + args[1] + "/Node") ;
-				bn.inscriptionParticipant(0);
-	
-	    }
-	    catch (NotBoundException re) { System.out.println(re) ; }
-	    catch (RemoteException re) { System.out.println(re) ; }
-	    catch (MalformedURLException e) { System.out.println(e) ; }
+			Node bn = null;
+			try
+				{
+					bn = (Node) Naming.lookup("rmi://" + args[0] + ":" + args[1] + "/Node") ;
+			}
+			catch (NotBoundException re) { System.out.println(re) ; }
+			catch (RemoteException re) { System.out.println(re) ; }
+			catch (MalformedURLException e) { System.out.println(e) ; }
+			
+			return bn;
 		}
   }
 }

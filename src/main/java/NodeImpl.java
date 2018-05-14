@@ -42,11 +42,11 @@ public class NodeImpl
 		return false;
 	}
 	
-	public void inscriptionParticipant(int id)
+	public void inscriptionParticipant(Participant p)
 		throws RemoteException
 	{
-		participants.add(id);
-		String op = "IB : " + id + " à " + this;
+		participants.add(p);
+		String op = "IB : " + p + " à " + this;
 		fileOperations.add(op);
 		System.out.println(op);
 		for(NodeImpl v : voisins)
