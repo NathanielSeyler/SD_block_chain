@@ -38,4 +38,9 @@ public class Block {
 	{
 		return next;
 	}
+	
+	public String toString()
+	{
+		return Integer.toString(profondeur) + createur.toString() + ash + Integer.toString(capacity);
+	}
 }

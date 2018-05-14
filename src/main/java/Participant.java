@@ -31,6 +31,7 @@ public class Participant {
 		try
 		{
 			n.inscriptionParticipant(this);
+			System.out.println("je me suis inscrit a un noeud");
 		}
 	    catch (RemoteException re) { System.out.println(re) ; }
 		
