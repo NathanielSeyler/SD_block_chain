@@ -16,6 +16,7 @@ public class Block {
 		createur = n;
 		ash = "Ash is OP";
 		next = null;
+		capacity = 10;
 	}
 	
 	public void setNext(Block b)
