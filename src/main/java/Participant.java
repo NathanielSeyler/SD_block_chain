@@ -75,6 +75,7 @@ public class Participant {
 			try
 				{
 					bn = (Node) Naming.lookup("rmi://" + args[0] + ":" + args[1] + "/Node") ;
+					System.out.println("connection a un noeud");
 			}
 			catch (NotBoundException re) { System.out.println(re) ; }
 			catch (RemoteException re) { System.out.println(re) ; }

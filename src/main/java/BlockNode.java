@@ -6,20 +6,17 @@ public class BlockNode {
 	//private LinkedList<String> fileOperations;
 	//private LinkedList<Participant> participants;
 	//TODO implements here
-	public static void main(String [] args)
+	public NodeImpl bind(String args)
 	{
-		if (args.length != 1)
-		{
-			System.out.println("Usage : java Serveur <port du rmiregistry>") ;
-			System.exit(0) ;
-		}
+		NodeImpl ni = null;
 		try
 			{
-				NodeImpl objLocal = new NodeImpl () ;
-				Naming.rebind("rmi://localhost:" + args[0] + "/Node",objLocal) ;
+				ni = new NodeImpl () ;
+				Naming.rebind("rmi://localhost:" + args + "/Node",ni) ;
 				System.out.println("Serveur Node pret") ;
 			}
 		catch (RemoteException re) { System.out.println(re) ; }
 		catch (MalformedURLException e) { System.out.println(e) ; }
+		return ni;
 	}
 }
