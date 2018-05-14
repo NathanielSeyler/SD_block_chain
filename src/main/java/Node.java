@@ -4,7 +4,7 @@ import java.rmi.RemoteException ;
 public interface Node extends Remote {
 	public void setVoisins(NodeImpl[] tab)
 		throws RemoteException;
-	public void inscriptionParticipant(Participant p)
+	public void inscriptionParticipant(int id)
 		throws RemoteException;
 	public void creationBlock()
 		throws RemoteException;
