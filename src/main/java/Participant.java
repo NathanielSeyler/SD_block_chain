@@ -44,6 +44,7 @@ public class Participant {
 			v = n.possede(id);
 		}
 		catch (RemoteException re) { System.out.println(re) ; }
+		System.out.println(v);
 		return v;
 	}
 	

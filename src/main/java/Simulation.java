@@ -19,7 +19,8 @@ public class Simulation {
 			n.creationBlock();
 		}
 		catch (RemoteException re) { System.out.println(re) ; }
-		System.out.println(p.possede(n));
+		p.possede(n);
 		//test
+		System.exit(0);
 	} 
 }
