@@ -11,6 +11,8 @@ public class Simulation {
 		NodeImpl ni = bn.bind(args[1]);
 		Node n = p.connect(args);
 		p.inscriptionNode(n);
+		n.creationBlock();
+		System.out.println(p.possede(n));
 		//test
 	} 
 }
