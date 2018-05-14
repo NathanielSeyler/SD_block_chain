@@ -70,7 +70,7 @@ public class Participant {
 	    try
 			{
 				Node bn = (Node) Naming.lookup("rmi://" + args[0] + ":" + args[1] + "/Node") ;
-				bn.inscriptionParticipant(this);
+				bn.inscriptionParticipant(0);
 	
 	    }
 	    catch (NotBoundException re) { System.out.println(re) ; }
